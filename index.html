@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Varun Cabs Bangalore offers safe, reliable and comfortable cab services. Sedan and SUV options, outstation packages, and airport pickup and drop. Call or WhatsApp 98800 04805.">
+  <meta name="theme-color" content="#081b45">
+  <title>Varun Cabs Bangalore | Safe • Reliable • Comfortable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #081b45;
+      --blue: #123a86;
+      --gold: #f4b928;
+      --ink: #14213d;
+      --muted: #64748b;
+      --pale: #f4f7fc;
+      --white: #fff;
+      --green: #16834a;
+      --shadow: 0 24px 70px rgba(8, 27, 69, .13);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: #fff;
+      font-family: "DM Sans", sans-serif; line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: auto; }
+    .topbar { background: var(--navy); color: #dce7ff; font-size: 13px; }
+    .topbar-inner { min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .topbar strong { color: #fff; font-weight: 700; }
+    header {
+      position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(14px); border-bottom: 1px solid #e9eef7;
+    }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-family: Manrope, sans-serif; font-weight: 800; color: var(--navy); font-size: 22px; letter-spacing: -.8px; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+      color: var(--navy); font-size: 22px; background: linear-gradient(145deg, #ffe28b, var(--gold));
+      box-shadow: 0 6px 15px rgba(244,185,40,.25);
+    }
+    .brand small { display: block; color: #73809a; font: 700 9px "DM Sans", sans-serif; letter-spacing: 2px; margin-top: -3px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #43516c; font-size: 14px; font-weight: 700; }
+    .nav-links a:hover { color: var(--blue); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 14px 22px; border-radius: 999px; font-weight: 800; border: 0;
+      transition: transform .2s, box-shadow .2s; cursor: pointer; font-size: 14px;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(8,27,69,.17); }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, #173f91, #081b45); }
+    .btn-gold { color: var(--navy); background: linear-gradient(135deg, #ffdf80, var(--gold)); }
+    .btn-green { color: #fff; background: #16834a; }
+    .hero {
+      overflow: hidden; position: relative; padding: 70px 0 82px;
+      background: radial-gradient(circle at 82% 35%, rgba(255,211,103,.23), transparent 28%),
+                  linear-gradient(120deg, #f4f7fc 0%, #edf3ff 55%, #fff8e8 100%);
+    }
+    .hero:before {
+      content: ""; position: absolute; width: 460px; height: 460px; border: 1px solid rgba(18,58,134,.08);
+      border-radius: 50%; right: -140px; top: -190px; box-shadow: 0 0 0 55px rgba(18,58,134,.025), 0 0 0 110px rgba(18,58,134,.02);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr .92fr; align-items: center; gap: 54px; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #8a5b00; background: #fff2cb; padding: 8px 14px; border-radius: 30px; font-size: 12px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; }
+    .eyebrow:before { content: ""; width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
+    h1 { font: 800 clamp(40px, 5.1vw, 66px)/1.08 Manrope, sans-serif; letter-spacing: -2.8px; color: var(--navy); margin: 22px 0 18px; }
+    h1 span { color: #c58a08; }
+    .hero-copy { max-width: 560px; color: #596982; font-size: 17px; line-height: 1.8; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .quick-points { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px; color: #475875; font-size: 13px; font-weight: 700; }
+    .quick-points span { display: flex; align-items: center; gap: 7px; }
+    .check { color: #16834a; font-size: 16px; }
+    .poster-wrap { position: relative; }
+    .poster-frame { background: white; padding: 10px; border-radius: 24px; box-shadow: 0 28px 75px rgba(8,27,69,.2); transform: rotate(1deg); }
+    .poster-frame img { width: 100%; height: auto; display: block; border-radius: 16px; }
+    .floating-note {
+      position: absolute; left: -30px; bottom: 30px; background: #fff; border-radius: 16px;
+      padding: 14px 18px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 11px;
+      font-size: 13px; font-weight: 800; color: var(--navy);
+    }
+    .floating-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: #fff3cf; font-size: 19px; }
+    .trust-strip { background: var(--navy); color: white; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trust-item { padding: 22px 14px; display: flex; justify-content: center; align-items: center; gap: 11px; border-right: 1px solid rgba(255,255,255,.14); }
+    .trust-item:last-child { border: 0; }
+    .trust-item b { display: block; font-size: 14px; }
+    .trust-item small { display: block; color: #b9c9ed; font-size: 11px; margin-top: 1px; }
+    .trust-icon { font-size: 24px; }
+    section { padding: 82px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 42px; }
+    .kicker { color: #b17b08; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+    h2 { font: 800 clamp(29px, 3.5vw, 42px)/1.2 Manrope, sans-serif; letter-spacing: -1.4px; color: var(--navy); margin: 10px 0 12px; }
+    .section-head p { color: var(--muted); margin: 0; font-size: 16px; }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card {
+      padding: 28px; border: 1px solid #e8edf5; border-radius: 20px; background: #fff;
+      box-shadow: 0 8px 26px rgba(8,27,69,.045); transition: .25s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: #f1d58d; }
+    .service-icon { width: 56px; height: 56px; border-radius: 17px; display: grid; place-items: center; background: #fff4d7; font-size: 27px; margin-bottom: 18px; }
+    .service-card h3 { color: var(--navy); font: 800 19px Manrope, sans-serif; margin: 0 0 8px; }
+    .service-card p { color: var(--muted); margin: 0; font-size: 14px; }
+    .fleet { background: var(--pale); }
+    .fleet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    .fleet-image { overflow: hidden; border-radius: 24px; box-shadow: var(--shadow); background: white; }
+    .fleet-image img { display: block; width: 100%; height: auto; }
+    .fleet-copy p { color: var(--muted); line-height: 1.8; }
+    .fleet-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 28px; }
+    .fleet-list div { background: white; border: 1px solid #e8edf5; border-radius: 12px; padding: 13px 15px; font-weight: 700; font-size: 13px; color: #34445f; }
+    .fleet-list span { color: #c18a13; margin-right: 7px; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .why-card { text-align: center; padding: 22px; }
+    .why-card .service-icon { margin: 0 auto 16px; background: #eef3ff; }
+    .why-card h3 { color: var(--navy); font: 800 17px Manrope, sans-serif; margin: 0 0 7px; }
+    .why-card p { color: var(--muted); font-size: 14px; margin: 0; }
+    .cta { padding: 0 0 82px; }
+    .cta-panel {
+      position: relative; overflow: hidden; padding: 48px 54px; border-radius: 28px;
+      background: linear-gradient(120deg, #0a1c47, #153c83); color: white;
+      display: flex; justify-content: space-between; align-items: center; gap: 28px;
+    }
+    .cta-panel:after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: 12%; top: -190px; box-shadow: 0 0 0 40px rgba(255,255,255,.035), 0 0 0 80px rgba(255,255,255,.025); }
+    .cta-panel h2 { color: white; margin: 0 0 8px; }
+    .cta-panel p { color: #c6d4f0; margin: 0; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+    footer { background: #061535; color: #c2cee5; padding: 34px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    footer .brand { color: white; }
+    footer .brand small { color: #9eacc8; }
+    .footer-note { font-size: 13px; text-align: right; }
+    .mobile-call { display: none; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 16px; } .hero-grid { gap: 30px; }
+      .floating-note { left: -12px; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(100% - 30px, 540px); }
+      .topbar-inner { justify-content: center; text-align: center; }
+      .topbar-inner span:last-child { display: none; }
+      .nav { min-height: 68px; }
+      .nav-links { display: none; }
+      .nav > .btn { padding: 11px 15px; font-size: 12px; }
+      .brand { font-size: 19px; }
+      .brand-mark { width: 38px; height: 38px; }
+      .hero { padding: 48px 0 55px; }
+      .hero-grid, .fleet-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 38px; }
+      h1 { letter-spacing: -1.8px; }
+      .hero-copy { font-size: 15px; }
+      .poster-wrap { width: 92%; margin: auto; }
+      .floating-note { left: -13px; bottom: 18px; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .trust-item { justify-content: flex-start; padding: 16px 12px; }
+      .trust-item:nth-child(2) { border-right: 0; }
+      .trust-item:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.14); }
+      section { padding: 60px 0; }
+      .service-grid, .why-grid { grid-template-columns: 1fr; gap: 14px; }
+      .service-card { padding: 23px; }
+      .fleet-grid { gap: 30px; }
+      .fleet-list { gap: 9px; }
+      .cta { padding-bottom: 60px; }
+      .cta-panel { padding: 32px 24px; display: block; }
+      .cta-actions { margin-top: 22px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-note { text-align: center; }
+      .mobile-call { display: flex; position: fixed; bottom: 12px; left: 12px; right: 12px; z-index: 20; box-shadow: 0 10px 30px rgba(8,27,69,.25); }
+      body { padding-bottom: 66px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>✦ <strong>Your Journey, Our Priority</strong></span>
+      <span>Call / WhatsApp: <strong>98800 04805</strong></span>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Varun Cabs home">
+        <span class="brand-mark">V</span>
+        <span>VARUN CABS<small>BANGALORE</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#services">Services</a><a href="#fleet">Our Fleet</a><a href="#why-us">Why Us</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="tel:+919880004805">☎ &nbsp; Call Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Bangalore cab services</div>
+          <h1>Your Journey.<br><span>Our Priority.</span></h1>
+          <p class="hero-copy">Travel with confidence with Varun Cabs Bangalore. Choose comfortable cab options for city travel, airport transfers and outstation journeys.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:+919880004805">☎ &nbsp; Call 98800 04805</a>
+            <a class="btn btn-green" href="https://wa.me/919880004805?text=Hello%20Varun%20Cabs%2C%20I%20would%20like%20to%20enquire%20about%20a%20cab." target="_blank" rel="noopener">WhatsApp Us &nbsp; ↗</a>
+          </div>
+          <div class="quick-points">
+            <span><b class="check">✓</b> Safe &amp; Secure</span>
+            <span><b class="check">✓</b> Reliable Service</span>
+            <span><b class="check">✓</b> Comfortable Travel</span>
+          </div>
+        </div>
+        <div class="poster-wrap">
+          <div class="poster-frame">
+            <img src="assets/varun-cabs-advertisement.jpeg" alt="Varun Cabs Bangalore advertisement showing sedan, SUV and van cab options with contact number 98800 04805">
+          </div>
+          <div class="floating-note"><span class="floating-icon">✈</span><span>Airport pickup<br>&amp; drop available</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item"><span class="trust-icon">🛡️</span><span><b>Safe &amp; Secure</b><small>Your journey matters</small></span></div>
+        <div class="trust-item"><span class="trust-icon">✦</span><span><b>Trusted Service</b><small>Service you can rely on</small></span></div>
+        <div class="trust-item"><span class="trust-icon">◷</span><span><b>24×7 Availability</b><small>Contact us anytime</small></span></div>
+        <div class="trust-item"><span class="trust-icon">🚘</span><span><b>Sedan &amp; SUV</b><small>Options for your trip</small></span></div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">What we offer</div>
+          <h2>Cab services for every journey</h2>
+          <p>From airport transfers to outstation travel, get in touch with us to plan your ride.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><div class="service-icon">🏙️</div><h3>Bangalore City Rides</h3><p>Comfortable cab options for your travel around Bangalore.</p></article>
+          <article class="service-card"><div class="service-icon">✈️</div><h3>Airport Pickup &amp; Drop</h3><p>Plan your airport transfer with a convenient pickup and drop service.</p></article>
+          <article class="service-card"><div class="service-icon">🛣️</div><h3>Outstation Packages</h3><p>Planning a trip outside Bangalore? Contact us for outstation travel options.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="fleet" id="fleet">
+      <div class="container fleet-grid">
+        <div class="fleet-image">
+          <img src="assets/varun-cabs-advertisement.jpeg" alt="Varun Cabs fleet options including sedan, SUV and passenger van">
+        </div>
+        <div class="fleet-copy">
+          <div class="kicker">Travel your way</div>
+          <h2>Choose the ride that suits your trip</h2>
+          <p>Whether you need a sedan for everyday travel, an SUV for extra space or a van for a group journey, contact Varun Cabs to discuss the right option for your plans.</p>
+          <div class="fleet-list">
+            <div><span>✓</span> Sedan options</div>
+            <div><span>✓</span> SUV options</div>
+            <div><span>✓</span> Outstation trips</div>
+            <div><span>✓</span> Airport transfers</div>
+          </div>
+          <a class="btn btn-primary" href="https://wa.me/919880004805?text=Hello%2C%20please%20share%20cab%20options%20and%20details." target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="why-us">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">The Varun Cabs promise</div>
+          <h2>A comfortable ride starts here</h2>
+          <p>We aim to make your travel simple, convenient and comfortable.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-card"><div class="service-icon">🛡️</div><h3>Safety Comes First</h3><p>Your safety and peace of mind are important to us.</p></article>
+          <article class="why-card"><div class="service-icon">🤝</div><h3>Reliable Service</h3><p>Reach out to us to discuss your travel requirements.</p></article>
+          <article class="why-card"><div class="service-icon">💺</div><h3>Comfortable Options</h3><p>Choose from sedan and SUV options for your journey.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <div class="kicker" style="color:#ffdb7a">Ready to travel?</div>
+            <h2>Let's plan your next ride.</h2>
+            <p>Call or WhatsApp Varun Cabs Bangalore for enquiries and bookings.</p>
+            <p style="font-size:24px;font-weight:800;color:#fff;margin-top:12px">98800 04805</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-gold" href="tel:+919880004805">☎ &nbsp; Call Now</a>
+            <a class="btn btn-green" href="https://wa.me/919880004805?text=Hello%20Varun%20Cabs%2C%20I%20would%20like%20to%20book%20a%20cab." target="_blank" rel="noopener">WhatsApp Us ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#home"><span class="brand-mark">V</span><span>VARUN CABS<small>BANGALORE</small></span></a>
+      <div class="footer-note">Safe · Reliable · Comfortable<br>Call / WhatsApp: <strong style="color:white">98800 04805</strong><br>© <span id="year"></span> Varun Cabs Bangalore. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <a class="btn btn-green mobile-call" href="https://wa.me/919880004805?text=Hello%20Varun%20Cabs%2C%20I%20would%20like%20to%20enquire." target="_blank" rel="noopener">WhatsApp Varun Cabs · 98800 04805</a>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
