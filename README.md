@@ -1,67 +1,109 @@
-# Varun Cabs - End to End DevOps Project
+# Varun Cabs - End-to-End DevOps Project
 
 ## Project Overview
 
-This project demonstrates an end-to-end DevOps deployment of a static website called **Varun Cabs Bangalore** using:
+This project demonstrates the deployment of a production-ready static website (**Varun Cabs Bangalore**) using modern DevOps tools and practices.
 
-- Linux (Ubuntu EC2)
-- AWS EC2
+The objective was to learn and implement:
+
+- Linux Administration
 - Git & GitHub
 - Docker
 - Docker Hub
+- AWS EC2
 - Route53 DNS
 - Nginx Reverse Proxy
-- SSL Certificate (Let's Encrypt)
-- GitHub Repository
-
-Final Website:
-
-https://varun-cabs.site
+- SSL using Let's Encrypt
+- GitHub Actions
+- Jenkins CI Pipeline
 
 ---
 
-# Architecture
+# Final Website
 
 ```text
-Developer
-    ↓
-GitHub Repository
-    ↓
-Docker Build
-    ↓
-Docker Hub
-    ↓
-AWS EC2
-    ↓
-Nginx Reverse Proxy
-    ↓
-SSL Certificate
-    ↓
-varun-cabs.site
+https://varun-cabs.site
 ```
 
 ---
 
-# Phase 1 - Launch EC2 Instance
+# Project Architecture
+
+```text
+Developer
+    │
+    ▼
+GitHub Repository
+    │
+    ▼
+GitHub Actions
+    │
+    ▼
+Docker Hub
+    │
+    ▼
+AWS EC2 Instance
+    │
+    ▼
+Nginx Reverse Proxy
+    │
+    ▼
+Docker Container
+    │
+    ▼
+Varun Cabs Website
+```
+
+---
+
+# Infrastructure Used
+
+## AWS Services
+
+```text
+EC2
+Route53
+Security Groups
+```
+
+## DevOps Tools
+
+```text
+Git
+GitHub
+Docker
+Docker Hub
+GitHub Actions
+Jenkins
+Nginx
+Certbot
+```
+
+---
+
+# Phase 1: Launch EC2 Instance
 
 ## Objective
 
-Create a Linux server to host the application.
+Create a Linux server for application deployment.
 
-### AWS Configuration
+### Instance Type
 
-- Ubuntu EC2 Instance
-- Public IP Enabled
+```text
+Ubuntu EC2
+```
 
 ### Open Ports
 
 ```text
-22 SSH
-80 HTTP
+22  SSH
+80  HTTP
 443 HTTPS
+9090 Jenkins
+50000 Jenkins Agent Communication
 ```
 
-### Connect to EC2
+### Connect to Server
 
 ```bash
 ssh -i key.pem ubuntu@PUBLIC_IP
@@ -69,7 +111,7 @@ ssh -i key.pem ubuntu@PUBLIC_IP
 
 ---
 
-# Phase 2 - Update Linux Server
+# Phase 2: Linux Setup
 
 Update package repository
 
@@ -77,63 +119,57 @@ Update package repository
 sudo apt update
 ```
 
-Purpose:
+Explanation:
 
 ```text
-Downloads latest package information.
+Downloads latest package metadata from Ubuntu repositories.
 ```
 
 ---
 
-# Phase 3 - Install Docker
+# Phase 3: Install Docker
 
-Install Docker:
+Install Docker
 
 ```bash
 sudo apt install docker.io -y
 ```
 
-Enable Docker:
-
-```bash
-sudo systemctl enable docker
-```
-
-Start Docker:
+Start Docker
 
 ```bash
 sudo systemctl start docker
 ```
 
-Verify Docker:
+Enable Docker
+
+```bash
+sudo systemctl enable docker
+```
+
+Verify Docker
 
 ```bash
 docker --version
 ```
 
-Check running containers:
-
-```bash
-docker ps
-```
-
-Test Docker:
+Test Docker
 
 ```bash
 docker run hello-world
 ```
 
-Purpose:
+Purpose
 
 ```text
-Verifies Docker installation.
+Confirms Docker Engine is functioning correctly.
 ```
 
 ---
 
-# Phase 4 - Create Website
+# Phase 4: Create Website
 
-Create project directory:
+Project Directory
 
 ```bash
 mkdir varun-cabs
@@ -141,29 +177,29 @@ mkdir varun-cabs
 cd varun-cabs
 ```
 
-Create website:
+Create Website File
 
 ```bash
 vi index.html
 ```
 
-Purpose:
+Contains:
 
 ```text
-Contains the website source code.
+Varun Cabs Bangalore Website HTML Code
 ```
 
 ---
 
-# Phase 5 - Create Dockerfile
+# Phase 5: Create Dockerfile
 
-Create Dockerfile:
+Create Dockerfile
 
 ```bash
 vi Dockerfile
 ```
 
-Contents:
+Content
 
 ```dockerfile
 FROM nginx:latest
@@ -173,49 +209,46 @@ COPY index.html /usr/share/nginx/html/index.html
 EXPOSE 80
 ```
 
-Explanation:
-
-FROM nginx:latest
+Explanation
 
 ```text
-Uses official nginx image.
-```
+FROM
+→ Uses official nginx image.
 
 COPY
+→ Copies website into nginx web root.
 
-```text
-Copies website file inside nginx web root.
-```
-
-EXPOSE 80
-
-```text
-Makes container listen on port 80.
+EXPOSE
+→ Opens port 80.
 ```
 
 ---
 
-# Phase 6 - Build Docker Image
+# Phase 6: Build Docker Image
 
-Build image:
+Build image
 
 ```bash
 docker build -t varun-cabs:v1 .
 ```
 
-Explanation:
+Explanation
 
 ```text
-docker build = Create image
+docker build
+    Creates image
 
--t = Tag
+-t
+    Tag image
 
-varun-cabs:v1 = Image Name and Version
+varun-cabs:v1
+    Image Name : Version
 
-. = Current Directory
+.
+    Current directory
 ```
 
-Verify:
+Verify
 
 ```bash
 docker images
@@ -223,35 +256,24 @@ docker images
 
 ---
 
-# Phase 7 - Run Docker Container
+# Phase 7: Run Docker Container
 
-Run website:
+Run Application
 
 ```bash
-docker run -d -p 80:80 --name varun-cabs-app varun-cabs:v1
+docker run -d \
+-p 80:80 \
+--name varun-cabs-app \
+varun-cabs:v1
 ```
 
-Explanation:
-
--d
-
-```text
-Detached mode
-```
-
--p 80:80
-
-```text
-Host Port : Container Port
-```
-
-Verify:
+Verify
 
 ```bash
 docker ps
 ```
 
-Test:
+Test
 
 ```bash
 curl localhost
@@ -259,79 +281,106 @@ curl localhost
 
 ---
 
-# Phase 8 - GitHub Integration
+# Container Architecture
 
-Initialize repository
+```text
+Docker Image
+       │
+       ▼
+Docker Container
+       │
+       ▼
+Nginx
+       │
+       ▼
+Static Website
+```
+
+---
+
+# Phase 8: GitHub Integration
+
+Initialize Repository
 
 ```bash
 git init
 ```
 
-Add files
+Add Files
 
 ```bash
 git add .
 ```
 
-Commit files
+Commit
 
 ```bash
-git commit -m "Initial Varun Cabs Website"
+git commit -m "Initial Project"
 ```
 
 Connect GitHub
 
 ```bash
-git remote add origin https://github.com/santhosh2958-dot/varun-cabs.git
+git remote add origin REPOSITORY_URL
 ```
 
-Push code
+Push
 
 ```bash
-git push -u origin main
+git push origin main
 ```
 
-Purpose:
+Purpose
 
 ```text
-Source code version control.
+Version Control
+Source Code Management
+Collaboration
 ```
 
 ---
 
-# Phase 9 - Domain Configuration
+# Phase 9: Route53 Domain Mapping
 
-Domain:
+Domain
 
 ```text
 varun-cabs.site
 ```
 
-DNS Provider:
-
-```text
-AWS Route53
-```
-
-Public IP:
+Public IP
 
 ```text
 13.203.192.176
 ```
 
-Create A Record:
+Create A Record
 
 ```text
-varun-cabs.site -> 13.203.192.176
+Name:
+varun-cabs.site
+
+Type:
+A
+
+Value:
+13.203.192.176
 ```
 
-Create WWW Record:
+Create WWW Record
 
 ```text
-www -> 13.203.192.176
+Name:
+www
+
+Type:
+A
+
+Value:
+13.203.192.176
 ```
 
-Purpose:
+Purpose
 
 ```text
 Maps domain to EC2 server.
@@ -339,73 +388,96 @@ Maps domain to EC2 server.
 
 ---
 
-# Phase 10 - Install Nginx
+# Phase 10: Install Nginx
 
-Install nginx:
+Install
 
 ```bash
 sudo apt install nginx -y
 ```
 
-Start nginx:
+Start
 
 ```bash
 sudo systemctl start nginx
 ```
 
-Verify:
+Check Status
 
 ```bash
 sudo systemctl status nginx
 ```
 
-Purpose:
-
-```text
-Acts as Reverse Proxy.
-```
-
 ---
 
-# Phase 11 - Configure HTTPS SSL
+# Phase 11: Enable HTTPS SSL
 
-Install Certbot:
+Install Certbot
 
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
 ```
 
-Generate Certificate:
+Generate Certificate
 
 ```bash
 sudo certbot --nginx
 ```
 
-Enter:
+Domain
 
 ```text
 varun-cabs.site
 www.varun-cabs.site
 ```
 
-Result:
+Result
 
 ```text
 HTTPS Enabled
-Automatic Renewal Configured
-```
-
-Purpose:
-
-```text
-Secures the website using SSL.
+Automatic Renewal Enabled
 ```
 
 ---
 
-# Phase 12 - Nginx Reverse Proxy
+# SSL Architecture
 
-Run container on:
+```text
+User
+  │
+  ▼
+HTTPS
+  │
+  ▼
+Nginx
+  │
+  ▼
+Docker Container
+  │
+  ▼
+Website
+```
+
+---
+
+# Phase 12: Docker + Nginx Reverse Proxy
+
+Problem
+
+```text
+Docker occupied port 80
+Nginx required port 80
+```
+
+Solution
+
+Container moved to:
+
+```text
+8080
+```
+
+Run Container
 
 ```bash
 docker run -d \
@@ -414,80 +486,299 @@ docker run -d \
 varun-cabs:v2
 ```
 
-Nginx forwards requests:
+Nginx Reverse Proxy
 
 ```text
 Internet
-   ↓
-Nginx
-   ↓
+     │
+     ▼
+Nginx :80/:443
+     │
+     ▼
 localhost:8080
-   ↓
+     │
+     ▼
 Docker Container
 ```
 
-Benefits:
+Benefits
 
-- SSL handled by nginx
-- Better security
-- Production architecture
+```text
+SSL termination
+Security
+Production Architecture
+Load Balancing Ready
+```
 
 ---
 
-# Phase 13 - Docker Hub
+# Phase 13: Docker Hub
 
-Create Docker Hub account.
-
-Login:
+Login
 
 ```bash
 docker login
 ```
 
-Tag image:
+Tag Image
 
 ```bash
 docker tag varun-cabs:v2 santhosh2958/varun-cabs:v2
-```
 
-Tag latest:
-
-```bash
 docker tag varun-cabs:v2 santhosh2958/varun-cabs:latest
 ```
 
-Push image:
+Push
 
 ```bash
 docker push santhosh2958/varun-cabs:v2
+
+docker push santhosh2958/varun-cabs:latest
 ```
 
-Purpose:
+Result
 
 ```text
-Stores images centrally.
+Image stored in Docker Hub
 ```
 
-Benefits:
+Purpose
 
 ```text
-Deploy image anywhere.
-
-EC2 crash?
-→ Pull image from Docker Hub.
+Central Image Repository
+Backup Images
+Easy Deployment
 ```
 
 ---
 
-# Project Components Learned
+# Phase 14: GitHub Actions
+
+Objective
+
+```text
+Automate Docker Build Process
+```
+
+Workflow
+
+```yaml
+name: Docker Build and Push
+```
+
+Flow
+
+```text
+Git Push
+   │
+   ▼
+GitHub Actions
+   │
+   ▼
+Build Docker Image
+   │
+   ▼
+Push Image
+```
+
+CI Concept Learned
+
+```text
+Continuous Integration
+```
+
+---
+
+# Phase 15: Jenkins Installation
+
+Create Volume
+
+```bash
+docker volume create jenkins_home
+```
+
+Run Jenkins
+
+```bash
+docker run -d \
+--name jenkins \
+-p 9090:8080 \
+-p 50000:50000 \
+-v jenkins_home:/var/jenkins_home \
+jenkins/jenkins:lts
+```
+
+Access
+
+```text
+http://SERVER_IP:9090
+```
+
+---
+
+# Phase 16: Jenkins Plugins
+
+Installed
+
+```text
+Git Plugin
+Pipeline Plugin
+Docker Plugin
+Docker Workflow Plugin
+SSH Agent
+```
+
+Purpose
+
+```text
+Enable CI/CD Features
+Git Integration
+Docker Integration
+Pipeline Automation
+```
+
+---
+
+# Phase 17: Jenkins Pipeline
+
+## First Pipeline
+
+```groovy
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Test') {
+            steps {
+                echo 'Jenkins Pipeline Works!'
+            }
+        }
+    }
+}
+```
+
+Output
+
+```text
+Jenkins Pipeline Works!
+Finished: SUCCESS
+```
+
+---
+
+# Phase 18: GitHub Integration with Jenkins
+
+Pipeline
+
+```groovy
+checkout([
+    $class: 'GitSCM',
+    branches: [[name: '*/main']],
+    userRemoteConfigs: [[
+        url: 'https://github.com/santhosh2958-dot/varun-cabs.git'
+    ]]
+])
+```
+
+Result
+
+```text
+Repository Cloned Successfully
+```
+
+Output
+
+```text
+Dockerfile
+README.md
+index.html
+.github
+```
+
+---
+
+# First Real CI Pipeline
+
+```text
+GitHub Repository
+        │
+        ▼
+Jenkins
+        │
+        ▼
+Clone Repository
+        │
+        ▼
+Show Files
+        │
+        ▼
+SUCCESS
+```
+
+---
+
+# Issue Encountered
+
+Docker Build Failure
+
+Error
+
+```text
+docker: not found
+```
+
+Reason
+
+```text
+Docker installed on EC2 Host
+
+Jenkins running inside separate container
+
+Docker CLI unavailable inside Jenkins container
+```
+
+Learning
+
+```text
+Host Docker Engine
+       ≠
+Jenkins Container
+```
+
+---
+
+# Current Architecture
+
+```text
+Developer
+     │
+     ▼
+GitHub
+     │
+     ▼
+Jenkins
+     │
+     ▼
+Git Checkout
+     │
+     ▼
+Workspace
+     │
+     ▼
+Docker Build (Pending)
+```
+
+---
+
+# Major Concepts Learned
 
 ## Linux
 
-Commands:
-
 ```bash
-cd
 ls
+cd
 pwd
 cat
 vi
@@ -496,28 +787,25 @@ systemctl
 
 ---
 
-## Git & GitHub
-
-Commands:
+## Git
 
 ```bash
 git init
 git add .
 git commit
 git push
+git pull
 ```
 
 ---
 
 ## Docker
 
-Commands:
-
 ```bash
 docker build
 docker run
-docker ps
 docker images
+docker ps
 docker stop
 docker rm
 docker push
@@ -525,87 +813,87 @@ docker push
 
 ---
 
-## AWS
-
-Services Used:
+## Jenkins
 
 ```text
-EC2
-Route53
-Security Groups
+Pipeline
+Stage
+Step
+Workspace
+Node
+Agent
+Build History
+Console Output
 ```
 
 ---
 
-## Nginx
-
-Used As:
+# Flowchart
 
 ```text
-Reverse Proxy
-```
-
----
-
-## SSL
-
-Tool:
-
-```text
-Let's Encrypt
-Certbot
-```
-
----
-
-# Current Project Status
-
-✅ Linux
-
-✅ AWS EC2
-
-✅ Docker
-
-✅ Dockerfile
-
-✅ Docker Image
-
-✅ Docker Container
-
-✅ GitHub Repository
-
-✅ Docker Hub
-
-✅ Route53 DNS
-
-✅ Domain Mapping
-
-✅ Nginx
-
-✅ SSL Certificate
-
-✅ Production Website
-
----
-
-# Next Learning Roadmap
-
-```text
+Developer
+   │
+   ▼
+Git Push
+   │
+   ▼
+GitHub Repository
+   │
+   ▼
 GitHub Actions
-     ↓
+   │
+   ▼
+Docker Hub
+   │
+   ▼
 Jenkins
-     ↓
-SonarQube
-     ↓
-Trivy
-     ↓
-Kubernetes
-     ↓
-Ingress
-     ↓
-Monitoring
+   │
+   ▼
+GitHub Checkout
+   │
+   ▼
+Docker Build
+   │
+   ▼
+Docker Hub Push
+   │
+   ▼
+Kubernetes (Future)
 ```
 
-# Final Outcome
+---
 
-Successfully deployed a Dockerized production website on AWS EC2 with Domain, SSL, Docker Hub, GitHub integration, and Nginx reverse proxy using DevOps practices.
+# Project Status
+
+```text
+✅ Linux
+✅ AWS EC2
+✅ Git
+✅ GitHub
+✅ Docker
+✅ Docker Image
+✅ Docker Container
+✅ Docker Hub
+✅ Route53
+✅ Domain
+✅ Nginx
+✅ SSL Certificate
+✅ GitHub Actions
+✅ Jenkins Installation
+✅ Jenkins Plugins
+✅ Jenkins Pipeline
+✅ Jenkins GitHub Checkout
+
+🟡 Jenkins Docker Integration (In Progress)
+
+Future:
+🔜 SonarQube
+🔜 Trivy
+🔜 Kubernetes
+🔜 Ingress
+🔜 Monitoring
+```
+
+# Conclusion
+
+Successfully built and deployed a production website using AWS EC2, Docker, Docker Hub, Route53, Nginx, SSL, GitHub Actions, and Jenkins. Developed a functional CI pipeline where Jenkins automatically fetches source code from GitHub and prepares it for automated builds.
